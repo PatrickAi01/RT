@@ -12,7 +12,7 @@ urlpatterns = [
     path('login', views.loginPage, name='login'),
     path('logout', views.logoutUser, name='logout'),
     
-    path('home', views.home, name='home'),
+    #path('home', views.home, name='home'),
     path('about', views.about, name='about'),
     path('aiModels', views.aiModels, name='aiModels'),
     path('contact', views.contact, name='contact'),

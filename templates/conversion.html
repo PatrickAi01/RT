@@ -17,7 +17,7 @@
         <meta http-equiv="Expires" content="0">
         <!-- Cache-busting for CSS and JavaScript files -->
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}?v=1">
-    </head>
+</head>
 <body>
     <div class="container-fluid margin-container" style="padding-top: 120px;">
         <h2 style="text-align: center; margin-bottom: 0; padding: 20px;">Upload Audio File</h2>
@@ -34,13 +34,13 @@
         <div id="error-message" class="errors" style="display: none;"></div>
     </div>
 
-    <div><h1 style="text-align: center">OR</h1></div>
+    <div><h1 style="text-align: center; margin-top: 30px;">OR</h1></div>
     
     <!-- YouTube 2 MP3 Converter Form -->
     {% if not success_convert %}
     <form action="{% url 'convert_mp3' %}" method="POST" id="form">
         {% csrf_token %}
-        <h1><i class="fab fa-youtube"></i> Enter the Youtube URL</h1>
+        <h2 style="text-align: center; margin-top: 30px;"> Enter the Youtube URL <i class="fab fa-youtube"></i> </h2>
         <div>
             <input type="text" name="video_id" placeholder="Youtube URL">
             <button id="submit-btn">Convert</button>
@@ -94,7 +94,7 @@
             <!-- Add more options for other speakers -->
         </select>
 
-        <button type="submit" class="btn btn-primary custom-button0">Convert File</button>
+        <button type="submit" class="btn btn-primary custom-button0" style="margin-top: 20px;" >Convert File</button>
     </form>
 
     {% if uploaded_file_name %}
@@ -115,6 +115,7 @@
         <p>Processed Data: {{ processed_data }}</p>
         <!-- Add more fields as needed -->
     {% endif %}
+
     <!-- audio player -->
     {% if converted_file_relative_path %}
         <audio controls id="audioPlayer">
