@@ -83,8 +83,8 @@ def contact(request):
     return render(request, 'contact.html')
 
 
-def userAccount(request):
-    return render(request, 'userAccount.html')
+def pricing(request):
+    return render(request, 'pricing.html')
 
 def conversion(request):
     if request.method == 'POST':

@@ -16,7 +16,7 @@ urlpatterns = [
     path('about', views.about, name='about'),
     path('aiModels', views.aiModels, name='aiModels'),
     path('contact', views.contact, name='contact'),
-    path('userAccount', views.userAccount, name='userAccount'),
+    path('pricing', views.pricing, name='pricing'),
     path('conversion', views.conversion, name='conversion'),
 
     path('admin/', admin.site.urls),

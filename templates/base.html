@@ -90,9 +90,9 @@
           <li class="nav-item ">
             <a class="nav-link {% block homeactive %}{% endblock homeactive %}" href="/home">Home</a>
           </li>
-          <li class="nav-item">
+          <!--<li class="nav-item">
             <a class="nav-link{% block aboutactive %}{% endblock aboutactive %}" href="/about">About</a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link{% block aiModelsactive %}{% endblock aiModelsactive %}" href="/aiModels">Ai models</a>
           </li>
@@ -118,7 +118,7 @@
               <img src="{% static 'anonUser.png' %}" class="img-fluid rounded-circle" width=40 alt="Profile image">
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="/userAccount">Profile</a></li>
+              <li><a class="dropdown-item" href="/pricing">Pricing</a></li>
               <li><a class="dropdown-item" href="/register">Register</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
