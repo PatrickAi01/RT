@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+{% block conversionactive %} active {% endblock conversionactive %}
+{% block title %} Conversion {% endblock title %}
+{% load static %}
+{% block body %}
+<head>
+    <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <meta name="description" content="Your description here">
+        <meta name="author" content="Your Name">
+        <meta name="robots" content="index, follow">
+    
+        <!-- Cache control meta tags to prevent caching -->
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Expires" content="0">
+        <!-- Cache-busting for CSS and JavaScript files -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}?v=1">
+    </head>
+<body>
+    <div class="container-fluid margin-container" style="padding-top: 120px;">
+        <h2 style="text-align: center; margin-bottom: 0; padding: 20px;">Upload Audio File</h2>
+        
+        <!-- File Container -->
+        <div id="file-drop-container" class="file-drop-container">
+            <h4>Drop your audio here</h4>
+            <p id="drag-text">Drag and drop your audio file here</p>
+            <input type="file" id="fileInput" style="display: none;">
+        </div>
+    
+        <!-- Trigger Button -->
+        <button id="trigger-upload-button" class="btn btn-success custom-button0" style="display: none;">Upload File</button>
+        <div id="error-message" class="errors" style="display: none;"></div>
+    </div>
+
+    <div><h1 style="text-align: center">OR</h1></div>
+    
+    <!-- YouTube 2 MP3 Converter Form -->
+    {% if not success_convert %}
+    <form action="{% url 'convert_mp3' %}" method="POST" id="form">
+        {% csrf_token %}
+        <h1><i class="fab fa-youtube"></i> Enter the Youtube URL</h1>
+        <div>
+            <input type="text" name="video_id" placeholder="Youtube URL">
+            <button id="submit-btn">Convert</button>
+        </div>
+        <input type="hidden" id="converted-audio-url" name="converted_audio_url" value="">
+    </form>
+    {% endif %}
+
+    <!-- Response Display -->
+    <div class="bottom-container">
+    {% if success is not None %}
+        {% if success %}
+            <div class="success">
+                <p>{{ song_title }}</p>
+                <p>File Size: {% if file_size_mb %}{{ file_size_mb|floatformat:2 }} MB{% else %}N/A{% endif %}</p>
+                <form action="{% url 'download_converted_audio' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="converted_audio_url" value="{{ song_link }}">
+                    <button type="submit" id="download-btn">DOWNLOAD</button>
+                </form>
+            </div>
+        {% else %}
+            <div class="errors">
+                <p>{{ message }}</p>
+            </div>
+        {% endif %}
+    {% endif %}
+
+    {% if success_message %}
+    <div class="success">
+        <p>{{ success_message }}</p>
+    </div>
+    {% endif %}
+    </div>
+
+<div class="container-fluid margin-container" style="padding-top: 120px;">
+    <h2>Convert Audio File</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <!-- Add a dropdown for selecting the speaker -->
+        <label for="ai_model">Select Speaker:</label>
+        <select class="form-select" name="ai_model" id="ai_model">
+            <option value="SpongebobSquarepants.pth">Spongebob</option>
+            <option value="PatrickStar.pth">Patrick</option>
+            <option value="SquidwardTentacles.pth">Squidward</option>
+            <option value="plankton2333333.pth">Plankton</option>
+            <option value="MrKrabs.pth">Mr.Krabs</option>
+            <option value="Madea.pth">Madea</option>
+            <!-- Add more options for other speakers -->
+        </select>
+
+        <button type="submit" class="btn btn-primary custom-button0">Convert File</button>
+    </form>
+
+    {% if uploaded_file_name %}
+        <p>Uploaded File: {{ uploaded_file_name }}</p>
+    {% endif %}
+
+    {% if error_message %}
+        <div class="alert alert-danger" role="alert">
+            {{ error_message }}
+        </div>
+    {% endif %}
+
+    {% if processed_data %}
+        <h2>Audio Conversion Results</h2>
+        <p>Uploaded File: {{ uploaded_file_name }}</p>
+        <p>Selected Speaker: {{ selected_speaker }}</p>
+        <p>Generated Audio File: {{ output_audio_filename }}</p>
+        <p>Processed Data: {{ processed_data }}</p>
+        <!-- Add more fields as needed -->
+    {% endif %}
+    <!-- audio player -->
+    {% if converted_file_relative_path %}
+        <audio controls id="audioPlayer">
+            <source src="{% get_media_prefix %}{{ converted_file_relative_path }}" type="audio/wav">
+            Your browser does not support the audio element.
+        </audio>
+    {% endif %} 
+
+    {% if status_message %}
+        <div class="status-message">
+            {{ status_message }}
+        </div>
+    {% endif %}
+</div>
+
+<!-- JavaScript for yt converter, dragdrop-->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("form");
+        const submitButton = document.getElementById("submit-btn");
+        const errorMessage = document.getElementById("error-message");
+        const downloadButton = document.getElementById("download-btn");
+        const convertedAudioUrlInput = document.getElementById("converted-audio-url");
+        const audioPreview = document.getElementById('audioPreview');
+        
+        form.addEventListener("submit", function (event) {
+            const videoIdInput = document.querySelector("input[name='video_id']");
+
+            if (!videoIdInput.value.trim()) {
+                event.preventDefault();
+                errorMessage.textContent = "Please enter a YouTube link";
+                errorMessage.style.display = "block";
+            } else {
+                errorMessage.style.display = "none";
+            }
+        });
+
+        downloadButton.addEventListener("click", function () {
+            // Set the value of the hidden input field with the converted audio URL
+            convertedAudioUrlInput.value = "{{ song_link }}"; // Replace with the actual value from the context
+        });
+    });
+    
+        document.addEventListener("DOMContentLoaded", function () {
+            const fileDropContainer = document.getElementById("file-drop-container");
+            const triggerUploadButton = document.getElementById("trigger-upload-button");
+            const fileInput = document.getElementById('fileInput');
+            let droppedFile = null;
+
+            // File Drop Container Events
+            fileDropContainer.addEventListener("dragover", (e) => {
+                e.preventDefault();
+                fileDropContainer.classList.add("drag-over");
+            });
+
+            fileDropContainer.addEventListener("dragleave", () => {
+                fileDropContainer.classList.remove("drag-over");
+            });
+            fileDropContainer.addEventListener('drop', (e) => {
+                e.preventDefault();
+                fileDropContainer.classList.remove("drag-over");
+                e.dataTransfer.dropEffect = "copy";
+
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    droppedFile = files[0];
+                    fileDropContainer.innerHTML = `<h4>File selected: ${droppedFile.name}</h4>`;
+                    triggerUploadButton.style.display = "block";
+                }
+            });
+            fileDropContainer.addEventListener('click', () => {
+                fileInput.click();
+              });
+            fileDropContainer.addEventListener('change', (e) => {
+                handleFile(e.target.files[0]);
+              });
+            function handleFile(file) {
+                if (file && file.type.startsWith('audio/')) {
+                  const reader = new FileReader();
+            
+                  reader.onload = (event) => {
+                    audioPreview.src = event.target.result;
+                    audioPreview.style.display = 'block';
+                  };
+            
+                  reader.readAsDataURL(file);
+                }
+            }  
+            
+
+            // Trigger Button Event
+            triggerUploadButton.addEventListener("click", async () => {
+                if (droppedFile) {
+                    const formData = new FormData();
+                    formData.append("audio_file", droppedFile);
+
+                    // Get the CSRF token from the page
+                    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                    formData.append('csrfmiddlewaretoken', csrfToken);
+
+                    try {
+                        const response = await fetch("{% url 'dropUpload' %}", {
+                            method: "POST",
+                            body: formData,
+                        });
+
+                        if (response.ok) {
+                            console.log("File uploaded successfully");
+                            fileDropContainer.innerHTML = `<h4>Upload successful: ${droppedFile.name}</h4>`;
+                            droppedFile = null;
+                            triggerUploadButton.style.display = "none";
+                        } else {
+                            console.error("File upload failed");
+                        }
+                    } catch (error) {
+                        console.error("Fetch error:", error);
+                    }
+                }
+            });
+
+        });
+    </script>
+    <!--end script-->
+</body>
+{% endblock body %}

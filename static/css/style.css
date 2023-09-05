@@ -1,0 +1,152 @@
+/* Reset default padding and margin */
+* {
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Global styles */
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(205, 255, 216, 100) 0%, rgba(148, 185, 255, 100) 100%) !important;
+  }
+  
+  /* Navbar styles */
+  .navbar {
+    background-color: rgba(255, 255, 255, 0.65);
+  }
+  
+  .navbar-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-nav .nav-link {
+    color: #000000;
+    font-size: 20px;
+  }
+  
+  .navbar-brand {
+    color: #000000 !important;
+  }
+  
+  .navbar-nav .nav-link.active {
+    color: #53b6a4 !important;
+  }
+  
+  .navbar-toggler-icon {
+    background-image: none !important;
+  }
+  
+  .dropdown-toggle::after {
+    display: none !important;
+  }
+  
+  /* Page wrapper and content styles */
+  .page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .content {
+    flex: 1;
+    padding-bottom: 60px;
+  }
+  
+  /* Footer styles */
+  footer {
+    color: #000000;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  /* Form and button styles */
+  #form {
+    width: 600px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 10px;
+  }
+  
+  #form h1 {
+    font-style: italic;
+    text-shadow: 1px 1px darkgray;
+  }
+  
+  #form input {
+    width: 300px;
+    padding: 14px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border: 1px solid lightgray;
+    font-family: inherit;
+    outline: none;
+    box-shadow: 2px 2px 5px gray;
+  }
+  
+  #form button {
+    padding: 14px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border: 1px solid lightgray;
+    background-color: whitesmoke;
+    cursor: pointer;
+    font-family: inherit;
+    box-shadow: 2px 3px 5px gray;
+    transition: 0.3s ease-out;
+  }
+  
+  #form button:hover {
+    color: white;
+    background-color: red;
+    border: 1px solid red;
+    transform: scale(1.1);
+  }
+  
+  /* File drop container styles */
+  .file-drop-container {
+    border: 2px dashed #ccc;
+    width: 600px;
+    height: 300px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 10px;
+    background-color: aquamarine;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .file-drop-container:hover {
+    background-color: #f0f0f0;
+    border-color: #333;
+  }
+  
+  .file-drop-container.drag-over {
+    background-color: #f0f0f0;
+    border-color: #333;
+  }
+  
+  #drag-text {
+    display: none;
+    font-weight: bold;
+  }
+  
+  .file-drop-container.drag-over #drag-text {
+    display: block;
+  }
+  
+  /* Other styles... */
+  /* ... */
+  

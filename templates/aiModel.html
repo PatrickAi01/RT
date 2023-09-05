@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block aiModelsactive %} active {% endblock aiModelsactive %}
+{%block title %} Ai Models {%endblock title %}
+
+{% load static %}
+
+{% block body %}
+
+<!--<form class="d-flex" role="search">
+  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+ <button class="btn btn-outline-success" type="submit">Search</button>
+</form>-->
+
+<style>
+  .custom-image {
+    width: 318.5px; 
+    height: 180px; 
+  }
+  .custom-button0 {
+    background-color: rgba(52, 58, 64, 1);
+    border-color: rgba(52, 58, 64, 1); 
+    color: #ffffff;
+    font-weight: bold;
+  }
+  .custom-card {
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 20px; 
+  }
+  .card-deck {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 25px;
+  }
+
+  @media (min-width: 1200px){
+    body{
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .card-deck{
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 25px;
+    }
+    .custom-card{
+      flex-basis: calc(33.33% - 30px);
+    }
+  }
+
+  </style>
+
+<div class="container-fluid my-5 p-5">
+  <h2 class="text-center"> AI Models </h2>
+
+  <div class="card-deck">
+  
+    <div class="custom-card">
+      <div class="card border-0" style="width: 20rem;background-color:rgba(255, 255, 255, 0.7)">
+        <img class="card-img-top custom-image" src="{% static 'spongebob/sb4.jpg' %}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Ai Spongebob Model</h5>
+          <p class="card-text"></p>
+          <a href="/conversion" class="btn btn-primary custom-button0">Try it out!</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="custom-card">
+      <div class="card border-0" style="width: 20rem; background-color: rgba(255, 255, 255, 0.7);">
+        <img class="card-img-top custom-image" src="{% static 'patrick/pat0.jpg' %}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title"> Ai Patrick Model</h5>
+          <p class="card-text "></p>
+          <a href="/conversion" class="btn btn-primary custom-button0">Try it out!</a>
+        </div>
+      </div>
+    </div>
+   
+    <div class="custom-card">
+      <div class="card border-0" style="width: 20rem; background-color: rgba(255, 255, 255, 0.7);">
+        <img class="card-img-top custom-image" src="{% static 'squidward.jpg' %}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title"> Ai Squidward Model</h5>
+          <p class="card-text "></p>
+          <a href="/conversion" class="btn btn-primary custom-button0">Try it out!</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="custom-card">
+      <div class="card" style="width: 20rem;background-color:rgba(255, 255, 255, 0.7)">
+        <img class="card-img-top custom-image" src="{% static 'plankton.jpg' %}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Ai Plankton Model</h5>
+          <p class="card-text"></p>
+          <a href="/conversion" class="btn btn-primary custom-button0">Try it out!</a>
+        </div>
+      </div>
+    </div> 
+
+    <div class="custom-card">
+      <div class="card" style="width: 20rem;background-color:rgba(255, 255, 255, 0.7)">
+        <img class="card-img-top custom-image" src="{% static 'mrKrabs.jpg' %}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Ai Mr. Krabs Model</h5>
+          <p class="card-text"></p>
+          <a href="/conversion" class="btn btn-primary custom-button0">Try it out!</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="custom-card">
+      <div class="card" style="width: 20rem;background-color:rgba(255, 255, 255, 0.7)">
+        <img class="card-img-top custom-image" src="{% static 'madea.jpg' %}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">Ai Madea Model</h5>
+          <p class="card-text"></p>
+          <a href="/conversion" class="btn btn-primary custom-button0">Try it out!</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock body %}

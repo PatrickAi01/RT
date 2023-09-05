@@ -1,0 +1,12 @@
+# Python-related
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+
+# Dependency directories
+lib/
+bin/
+
+#macOS
+.DS_Store

@@ -1,0 +1,5 @@
+django==4.2.4
+gunicorn
+psycopg2
+dj-database-url
+django-dotenv==1.4.2

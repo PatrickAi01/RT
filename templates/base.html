@@ -1,0 +1,150 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <style>
+    .navbar {
+      background-color: rgba(255, 255, 255, 0.65);
+    }
+
+    .navbar-content {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-nav .nav-link {
+      color: #000000;
+      font-size: 20px;
+    }
+
+    .navbar-brand {
+      color: #000000 !important;
+    }
+
+    .navbar-nav .nav-link.active {
+      color: #53b6a4 !important;
+    }
+
+    .navbar-toggler-icon {
+      background-image: none !important; /* Remove the default toggle icon */
+    }
+
+    .dropdown-toggle::after {
+      display: none !important; /* Hide the dropdown arrow */
+    }
+
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(205, 255, 216, 100) 0%, rgba(148, 185, 255, 100) 100%) !important;
+    }
+    
+    .page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure the container takes at least the viewport height */
+  }
+
+  .content {
+    flex: 1; /* Allow the content to grow and fill the remaining space */
+    padding-bottom: 60px; /* Adjust the padding to make space for the footer */
+  }
+
+    footer {
+      /* background-color: #343a40; */
+      color:  #000000;
+      text-align: center;
+      padding: 10px 0;
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+  </style>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <title>{%block title %}{%endblock title %} </title>
+</head>
+
+<body>
+  <div class="page-wrapper">
+  <nav class="navbar navbar-expand-md fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/home">RoyalTunes</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item ">
+            <a class="nav-link {% block homeactive %}{% endblock homeactive %}" href="/home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link{% block aboutactive %}{% endblock aboutactive %}" href="/about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link{% block aiModelsactive %}{% endblock aiModelsactive %}" href="/aiModels">Ai models</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link{% block conversionactive %}{% endblock conversionactive %}" href="/conversion">Convert</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link{% block contactactive %}{% endblock contactactive %}" href="/contact">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link{% block registeractive %}{% endblock registeractive %}" href="/register"></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link{% block loginPageactive %}{% endblock loginPageactive %}" href="/login"></a>
+          </li>
+        
+        </ul>
+
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <img src="{% static 'anonUser.png' %}" class="img-fluid rounded-circle" width=40 alt="Profile image">
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="/userAccount">Profile</a></li>
+              <li><a class="dropdown-item" href="/register">Register</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+  </nav>
+
+  <div class="content">
+    {% block body %}
+    {% endblock body %}
+  </div>
+
+  <footer>
+    <p class="text-center m-0">
+      &copy; 2023 | All rights reserved
+    </p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
+
