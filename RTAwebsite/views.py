@@ -207,6 +207,7 @@ def conversion(request):
     context = {'form': form}
     return render(request, 'conversion.html', context)
 
+
 #dragDrop Function
 def dropUpload(request):
     if request.method == 'POST':
@@ -247,7 +248,6 @@ def dropUpload(request):
                 return JsonResponse({'message': 'No file provided'})
 
     return render(request, 'conversion.html')
-
 
 
 def mp3_conversion(video_id, api_key, api_host):
