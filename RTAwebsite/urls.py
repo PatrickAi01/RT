@@ -17,6 +17,7 @@ urlpatterns = [
     path('aiModels', views.aiModels, name='aiModels'),
     path('contact', views.contact, name='contact'),
     path('pricing', views.pricing, name='pricing'),
+    path('subscription/', views.subscription_view, name='subscription'),
     path('conversion', views.conversion, name='conversion'),
 
     path('admin/', admin.site.urls),

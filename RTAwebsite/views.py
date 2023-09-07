@@ -68,6 +68,8 @@ def about(request):
 def aiModels(request):
     return render(request, 'aiModel.html')
 
+def subscription_view(request):
+    return render(request, 'subscription.html')
 
 def contact(request):
     if request.method == "POST":

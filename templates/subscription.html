@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% block subscriptionactive %} active {% endblock subscriptionactive %}">
+{%block title %} Subscription {%endblock title %}
+{% block body %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Page</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;;
+        }
+
+        .box {
+            max-width: 600px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 80px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .subscription-category {
+            display: flex;
+            justify-content: space-between;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            transition: transform 0.2s ease-in-out;
+            cursor: pointer;
+        }
+
+        .subscription-category:hover {
+            transform: scale(1.05);
+        }
+
+        .subscription-category:hover h2 {
+            color: #007bff;
+        }
+
+        .subscription-category h2 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .subscription-price {
+            font-size: 18px;
+            color: #007bff;
+        }
+
+        .subscription-description {
+            font-size: 14px;
+            color: #777;
+        }
+
+        .subscription-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .subscribe-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .subscribe-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>Subscription Plans</h1>
+        <div class="subscription-category">
+            <div>
+                <h2>Free</h2>
+                <div class="subscription-description">Access basic features for free.</div>
+            </div>
+            <div class="subscription-price">Free</div>
+        </div>
+        <div class="subscription-category">
+            <div>
+                <h2>Premium Monthly</h2>
+                <div class="subscription-description">Get full access on a monthly basis.</div>
+            </div>
+            <div class="subscription-price">$9.99/month</div>
+        </div>
+        <div class="subscription-category">
+            <div>
+                <h2>Premium Yearly</h2>
+                <div class="subscription-description">Save with an annual subscription.</div>
+            </div>
+            <div class="subscription-price">$99.99/year</div>
+        </div>
+        <div class="subscription-button">
+            <button class="subscribe-button">Subscribe</button>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock body %}
