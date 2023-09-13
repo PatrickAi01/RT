@@ -1,6 +1,8 @@
 {% extends "base.html" %}
+
 {% block conversionactive %} active {% endblock conversionactive %}
-{% block title %} Conversion {% endblock title %}
+{%block title %} Player {%endblock title %}
+
 {% load static %}
 {% block body %}
 
@@ -10,14 +12,14 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="description" content="Your description here">
         <meta name="author" content="Your Name">
-        <meta name="robots" content="index, follow">
+        <meta name="robots" content="index, follow">       
         <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Expires" content="0">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}?v=1">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}?v=1">   
 </head>
+
 <body>
-<div class="container">
     <div class="container-fluid margin-container" style="padding-top: 120px;">
         
     {% if not success_convert %}
@@ -32,7 +34,7 @@
     </form>
     {% endif %}
 
-    <div style="text-align: center; margin-top: 30px;" class="bottom-container">
+    <div class="bottom-container">
     {% if success is not None %}
         {% if success %}
             <div class="success">
@@ -41,7 +43,7 @@
                 <form action="{% url 'download_converted_audio' %}" method="POST">
                     {% csrf_token %}
                     <input type="hidden" name="converted_audio_url" value="{{ song_link }}">
-                    <button type="submit" id="download-btn" class="btn btn-primary custom-button0">Grab</button>
+                    <button type="submit" id="download-btn">DOWNLOAD</button>
                 </form>
             </div>
         {% else %}
@@ -67,7 +69,7 @@
         <form method="post" enctype="multipart/form-data" style="margin-top: 30px; text-align: center;">
             {% csrf_token %}
             {{ form.as_p }}
-
+    
             <label for="ai_model">Select Speaker:</label>
             <select class="form-select" name="ai_model" id="ai_model">
                 <option value="SpongebobSquarepants.pth">Spongebob</option>
@@ -78,7 +80,8 @@
                 <option value="Madea.pth">Madea</option>
                 <!-- Add more options for other speakers -->
             </select>
-        <button type="submit" class="btn btn-primary custom-button0" style="margin-top: 20px;">Convert File</button>
+    
+            <button type="submit" class="btn btn-primary custom-button0" style="margin-top: 20px;">Convert File</button>
         </form>
     </div>
    
@@ -101,10 +104,18 @@
             {{ status_message }}
         </div>
     {% endif %}
-    </div>
-</div>
 
-<script>
+    <div style="text-align: center; margin-top: 50px;">
+        <p>Status: {{ "Successfully Converted" }}</p>
+        <audio controls>
+            <source src="media/combined_Audio" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    </div>
+
+    <script>
     document.addEventListener("DOMContentLoaded", function () {
         const form = document.getElementById("form");
         const submitButton = document.getElementById("submit-btn");
@@ -126,14 +137,11 @@
         });
 
         downloadButton.addEventListener("click", function () {
-
+            
             convertedAudioUrlInput.value = "{{ song_link }}"; 
-        });
     });
     
-    
-</script>
-
+    </script>
 </body>
 
 {% endblock body %}

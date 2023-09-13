@@ -147,6 +147,21 @@
     display: block;
   }
   
-  /* Other styles... */
-  /* ... */
+  .custom-file-input {
+    /* Add your custom styles here */
+    background-color: #007bff; /* Change to your desired background color */
+    color: #fff; /* Change to your desired text color */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+  /* Optional: Style the file input's text and background on hover */
+  .custom-file-input:hover {
+      /* Add styles for button hover state if needed */
+      background-color: #0056b3; /* Change to your desired hover background color */
+      color: #fff; /* Change to your desired text color */
+}
   

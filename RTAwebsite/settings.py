@@ -1,12 +1,9 @@
 from django.core.management.utils import get_random_secret_key
 from pathlib import Path
-import os, sys#, dj_database_url
+import os, sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -71,8 +68,6 @@ WSGI_APPLICATION = "RTAwebsite.wsgi.application"
 
 
 # Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
 
 #development db (sqlite-saved locally)
 if DEBUG is True:
@@ -83,28 +78,10 @@ if DEBUG is True:
         }
     }
 
-""" 
-elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
-    if os.getenv("DATABASE_URL", None) is None:
-        raise Exception("DATABASE_URL environment variable not defined")
-    DATABASES = {
-        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
-        
-    }
-make this work?
-"""
+
 
 """
-#development database
-if DEBUG:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),  # Replace with the desired database name
-        }
-    }
-else:
-    
+
     POSTGRES_DB = os.environ.get("db")
     POSTGRES_PASSWORD = os.environ.get("AVNS_5LxrmzcLJWrTcebwiv0")
     POSTGRES_USER = os.environ.get("db")
@@ -119,8 +96,8 @@ else:
         and POSTGRES_PORT is not None
     )
 
-    if POSTGRES_READY:"""
-"""
+    if POSTGRES_READY:
+
 #production db (postgresql - saved in digitalocean db)
 DATABASES = {
     "default": {
@@ -172,7 +149,8 @@ USE_TZ = True
 STATIC_URL = "static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),]
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 
 # Default primary key field type
@@ -181,5 +159,5 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),]
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 #youtube api
-API_KEY = '618c641402msh87f3cbb65fc2a64p16e8f2jsn2685ae2145b5'
-API_HOST = 'youtube-mp36.p.rapidapi.com'
+API_KEY = ''
+API_HOST = ''

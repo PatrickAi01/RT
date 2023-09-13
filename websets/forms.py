@@ -14,5 +14,5 @@ class CreateUserForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
         
 class audioAccept(forms.Form):
-    audioFile = forms.FileField(validators=[FileExtensionValidator(allowed_extensions=['mp3', 'wav', 'ogg'])])
+    Audio_File = forms.FileField(validators=[FileExtensionValidator(allowed_extensions=['mp3', 'wav', 'ogg'])])
         
